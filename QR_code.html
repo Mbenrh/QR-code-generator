@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="QR_code.css"> <!-- Linking to external CSS file -->
+</head>
+<body>
+    <div class="container">
+        <p>Enter your text or URL</p> <!-- Prompt for user input -->
+        <input type="text" placeholder="Text or URL" id="qrText"> <!-- Input field for text or URL -->
+        <div id="imgBox"> <!-- Container for displaying generated QR code -->
+            <img src="" id="qrImage"> <!-- Image tag for displaying QR code -->
+        </div>
+        <button onclick="generateQR()">Generate QR code</button> <!-- Button to trigger QR code generation -->
+    </div>
+    <script>
+        let imgBox = document.getElementById("imgBox"); // Getting reference to the image container
+        let qrImage = document.getElementById("qrImage"); // Getting reference to the image element
+        let qrText = document.getElementById("qrText"); // Getting reference to the input field for text or URL
+
+        function generateQR() {
+            if (qrText.value.length > 0) { // Checking if input field is not empty
+                // Generating QR code using QR code API and setting the source of the image
+                qrImage.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + qrText.value;
+                imgBox.classList.add("show-img"); // Adding class to show the image container
+            } else {
+                qrText.classList.add('error'); // Adding error class to input field
+                setTimeout(() => {
+                    qrText.classList.remove('error'); // Removing error class after 1 second
+                }, 1000);
+            }
+        }
+    </script>
+</body>
+</html>
